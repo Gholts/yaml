@@ -13,8 +13,8 @@ proxy-providers:
 
 # 节点信息
 proxies:
-  - {name: 直连, type: DIRECT}
-  - {name: 丟棄, type: REJECT}
+  - {name: 直连, type: direct}
+  - {name: 丟棄, type: reject}
 
 # 全局配置 
 port: 7890
