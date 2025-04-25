@@ -27,7 +27,173 @@
 
 <!-- AUTO-GENERATED-START -->
 ```yaml
+# 注意规则在满足自己需求情况下，尽量做到精简，不要过度复杂，以免影响性能。
+# 机场订阅
+proxy-providers:
+  Airport1:
+    url: "http://192.168.10.2:3001/subgholts/download/collection/All2?target=ClashMeta"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
 
+# 节点信息
+proxies:
+  - {name: 直连, type: direct}
+  - {name: 丟棄, type: reject}
+
+# 全局配置 
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+allow-lan: true
+bind-address: "*"
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+log-level: warning
+find-process-mode: 'off'
+# interface-name: en0
+global-client-fingerprint: chrome
+keep-alive-idle: 600
+keep-alive-interval: 15
+disable-keep-alive: false
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 控制面板
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: "/etc/mihomo/run/ui"
+external-ui-name: zashboard
+external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+# 嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - "+.v2ex.com"
+  skip-domain:
+    - "rule-set:private_domain,cn_domain"
+    - "+.push.apple.com"
+
+# 入站  
+tun:
+  enable: true
+  # system/gvisor/mixed
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+# DNS模块
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  respect-rules: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "rule-set:private_domain,cn_domain"
+    - "+.services.googleapis.cn"
+    - "+.xn--ngstr-lra8j.com"
+    - "time.*.com"
+  default-nameserver:
+    - 223.5.5.5
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+  # namesever尽量用运营商提供的DNS
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+ 
+# 出站策略
+# 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
+pr: &pr {type: select, proxies: [🚀 默认代理, 🇭🇰 香港自动, 🇸🇬 新加坡自动, 🇹🇼 臺灣自动, 🇯🇵 日本自动, 🇺🇸 美国自动, ♻️ 自动选择, 🌐 全部节点, 直连]}
+proxy-groups:
+  - {name: 🚀 默认代理, type: select, proxies: [🇭🇰 香港自动, 🇸🇬 新加坡自动, 🇹🇼 臺灣自动, 🇯🇵 日本自动, 🇺🇸 美国自动, ♻️ 自动选择, 🌐 全部节点, 直连]}
+  - {name: 📹 YouTube, <<: *pr}
+  - {name: 🎵 Spotify, <<: *pr}
+  - {name: 🌸 巴哈姆特, type: select, proxies: [🇹🇼 臺灣自动, 🇭🇰 香港自动, 直连, 🚀 默认代理]}
+  - {name: 🤖 AI, type: select, proxies: [🇺🇸 美国自动, 🇸🇬 新加坡自动, 直连, 🚀 默认代理]}
+  - {name: 🪟 Microsoft, <<: *pr}
+  - {name: 🍎 Apple, type: select, proxies: [直连, 🇺🇸 美国自动, 🚀 默认代理]}
+  - {name: 🧸 AppleNews, type: select, proxies: [🇺🇸 美国自动, 直连, 🚀 默认代理]}
+  - {name: 🕹 Game, type: select, proxies: [🚀 默认代理, 直连]}
+  - {name: ⬇️ GameDL, type: select, proxies: [直连, 🚀 默认代理]}
+  - {name: 🎯 直连, type: select, proxies: [直连, 🚀 默认代理]}
+  - {name: 🈲 自訂廣告, type: select, proxies: [丟棄, 直连, 🚀 默认代理]}
+  - {name: 🐟 漏网之鱼, <<: *pr}
+  - {name: 🇭🇰 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
+  - {name: 🇸🇬 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新|SG|(?i)Sing))^((?!(台|日|韩|港|深|美)).)*$"}
+  - {name: 🇹🇼 臺灣自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(臺|台|TW|(?i)TAIWAN))^((?!(港|日|韩|新|深|美)).)*$"}
+  - {name: 🇯🇵 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
+  - {name: 🇺🇸 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"}
+  - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
+  - {name: 🌐 全部节点, type: select, include-all: true}
+
+# 规则匹配
+# 此规则部分没有做防泄露处理，因为弊严重大于利！
+rules:
+  - RULE-SET,private_domain,直连
+  - RULE-SET,apple_domain,🍎 Apple
+  - RULE-SET,apple_news,🧸 AppleNews
+  - RULE-SET,microsoft_domain,🪟 Microsoft
+  - RULE-SET,ai,🤖 AI
+  - RULE-SET,game,🕹 Game
+  - RULE-SET,gamedl,⬇️ GameDL
+  - RULE-SET,gamedlcn,⬇️ GameDL
+  - RULE-SET,youtube_domain,📹 YouTube
+  - RULE-SET,bahamut_domain,🌸 巴哈姆特
+  - RULE-SET,spotify,🎵 Spotify
+  - RULE-SET,ad-gholts,🈲 自訂廣告
+  - RULE-SET,gfw_domain,🚀 默认代理
+  - RULE-SET,geolocation-not-cn,🚀 默认代理
+  - RULE-SET,cn_domain,🎯 直连
+  - RULE-SET,cn_ip,🎯 直连
+  - MATCH,🐟 漏网之鱼
+
+# 规则集
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+rule-providers: 
+  private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
+  game: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/Game.list"}
+  gamedl: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/GameDownload/GameDownload.list"}
+  gamedlcn: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.list"}
+  ai: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
+  youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
+  spotify: { <<: *class, url: "https://https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Spotify/Spotify.list"}
+  bahamut_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs"}
+  microsoft_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
+  apple_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
+  apple_news: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleNews/AppleNews.list"}
+  gfw_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
+  geolocation-not-cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
+  cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
+  
+  ad-gholts: { <<: *class, url: "https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/ad.list"}
+  
+  cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
 ```
 <!-- AUTO-GENERATED-END -->
 
