@@ -153,6 +153,8 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - RULE-SET,private_domain,直连
+  - RULE-SET,ad-gholts,🈲 自訂廣告
+  - RULE-SET,ad-awavenue,🈲 自訂廣告
   - RULE-SET,apple_domain,🍎 Apple
   - RULE-SET,apple_news,🧸 AppleNews
   - RULE-SET,microsoft_domain,🪟 Microsoft
@@ -163,7 +165,6 @@ rules:
   - RULE-SET,youtube_domain,📹 YouTube
   - RULE-SET,bahamut_domain,🌸 巴哈姆特
   - RULE-SET,spotify,🎵 Spotify
-  - RULE-SET,ad-gholts,🈲 自訂廣告
   - RULE-SET,gfw_domain,🚀 默认代理
   - RULE-SET,geolocation-not-cn,🚀 默认代理
   - RULE-SET,cn_domain,🎯 直连
@@ -175,6 +176,7 @@ rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
+  yaml: &yaml {type: inline, interval: 86400, behavior: classical, format: yaml}
 rule-providers: 
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   game: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/Game.list"}
@@ -192,6 +194,7 @@ rule-providers:
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   
   ad-gholts: { <<: *class, url: "https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/ad.list"}
+  ad-awavenue: { <<: *yaml, url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml"}
   
   cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
 ```
