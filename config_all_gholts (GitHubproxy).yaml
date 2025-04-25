@@ -134,11 +134,11 @@ rules:
   - RULE-SET,youtube_domain,📹 YouTube
   - RULE-SET,bahamut_domain,🌸 巴哈姆特
   - RULE-SET,spotify,🎵 Spotify
+  - RULE-SET,ad-gholts,🈲 自訂廣告
   - RULE-SET,gfw_domain,🚀 默认代理
   - RULE-SET,geolocation-not-cn,🚀 默认代理
   - RULE-SET,cn_domain,🎯 直连
   - RULE-SET,cn_ip,🎯 直连
-  - RULE-SET,ad-gholts,🈲 自訂廣告
   - MATCH,🐟 漏网之鱼
 
 # 规则集
