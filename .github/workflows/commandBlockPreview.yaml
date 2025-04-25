@@ -16,7 +16,7 @@ jobs:
       - name: Read YAML and update README
         run: |
           # 設定檔案路徑（請填入 .yaml 的相對路徑）
-          YAML_FILE="config_all_gholts.yaml"
+          YAML_FILE="./config_all_gholts.yaml"
           README_FILE="README.md"
 
           # 將 YAML 內容包裝成 Markdown 的 code block 格式

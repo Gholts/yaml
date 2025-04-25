@@ -76,7 +76,7 @@ jobs:
 
             ${{ steps.changelog.outputs.commits }}
           files: |
-            config_all_gholts.yaml
-            config_all_gholts (GitHubproxy).yaml
+            ./config_all_gholts.yaml
+            ./config_all_gholts (GitHubproxy).yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
