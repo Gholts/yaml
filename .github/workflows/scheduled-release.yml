@@ -5,6 +5,9 @@ on:
     - cron: '0 0 */3 * *'  # 每三天 UTC 00:00 執行
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
