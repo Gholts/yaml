@@ -1,0 +1,39 @@
+name: Update README from YAML which Mihomo config
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小時執行一次，可依需求更改
+  workflow_dispatch:  # 可手動觸發
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Read YAML and update README
+        run: |
+          # 設定檔案路徑（請填入 .yaml 的相對路徑）
+          YAML_FILE="config_all_gholts.yaml"
+          README_FILE="README.md"
+
+          # 將 YAML 內容包裝成 Markdown 的 code block 格式
+          CONTENT=$(printf '```yaml\n%s\n```' "$(cat "$YAML_FILE")")
+
+          # 使用 awk 來插入新的內容，避免 sed 在某些系統出現轉義問題
+          awk -v content="$CONTENT" '
+            BEGIN {start=0}
+            /<!-- AUTO-GENERATED-START -->/ {print; print content; start=1; next}
+            /<!-- AUTO-GENERATED-END -->/ {start=0}
+            start==0 {print}
+          ' "$README_FILE" > temp.md && mv temp.md "$README_FILE"
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "Auto update README from YAML"
+          git push

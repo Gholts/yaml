@@ -1,0 +1,82 @@
+name: Scheduled Release
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *'  # 每三天 UTC 00:00 執行
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 拿到完整 git 歷史以便找 commits
+
+      - name: Get last release tag
+        id: last_release
+        run: |
+          tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+
+      - name: Get commits since last release
+        id: changelog
+        run: |
+          LAST_TAG="${{ steps.last_release.outputs.tag }}"
+          if [ -z "$LAST_TAG" ]; then
+            range=""
+          else
+            range="$LAST_TAG..HEAD"
+          fi
+
+          COMMITS=$(git log $range --pretty=format:"- %ad: %s (%an)" --date=short --no-merges)
+          echo "commits<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "$COMMITS" > commit-log.txt
+
+      - name: Check for new commits
+        id: has_commits
+        run: |
+          if [ -s commit-log.txt ]; then
+            echo "has_commits=true" >> $GITHUB_OUTPUT
+          else
+            echo "No new commits. Skipping release."
+            echo "has_commits=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Exit if no commits
+        if: steps.has_commits.outputs.has_commits == 'false'
+        run: exit 0
+
+      - name: Set tag name
+        id: tag
+        run: echo "tag=v$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "Release ${{ steps.tag.outputs.tag }}"
+          body: |
+            ### 🚀 Release Notes
+
+            config_all_gholts - 無 GitHub 加速的配置檔案
+
+            config_all_gholts (GitHubproxy) - 配置了 GitHub 加速的配置檔案
+
+            配置檔案中策略組規則和面板檔案需要透過 GitHub 連結獲取，如果機場連結配置得當使用無 GitHub 加速的版本即可。反之選擇 GitHub 加速的版本。
+
+            ---
+
+            ### 📜 Changelog
+
+            ${{ steps.changelog.outputs.commits }}
+          files: |
+            config_all_gholts.yaml
+            config_all_gholts (GitHubproxy).yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
