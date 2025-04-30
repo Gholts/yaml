@@ -159,9 +159,9 @@ rules:
   - RULE-SET,apple_news,🧸 AppleNews
   - RULE-SET,microsoft_domain,🪟 Microsoft
   - RULE-SET,ai,🤖 AI
-  - RULE-SET,game,🕹 Game
   - RULE-SET,gamedl,⬇️ GameDL
   - RULE-SET,gamedlcn,⬇️ GameDL
+  - RULE-SET,game,🕹 Game
   - RULE-SET,youtube_domain,📹 YouTube
   - RULE-SET,bahamut_domain,🌸 巴哈姆特
   - RULE-SET,spotify,🎵 Spotify
