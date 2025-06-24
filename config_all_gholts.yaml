@@ -2,7 +2,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "http://192.168.10.2:3001/subgholts/download/collection/All2?target=ClashMeta"
+    url: "http://192.168.10.2:3001/gholts0x13top/download/collection/All2?target=ClashMeta"
     type: http
     interval: 86400
     health-check:
@@ -113,7 +113,7 @@ proxy-groups:
   - {name: 🈲 自訂廣告, type: select, proxies: [丟棄, 直连, 🚀 默认代理]}
   - {name: 🐟 漏网之鱼, <<: *pr}
   - {name: 🇭🇰 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-  - {name: 🇸🇬 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新|SG|(?i)Sing))^((?!(台|日|韩|港|深|美)).)*$"}
+  - {name: 🇸🇬 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新加|SG|(?i)Sing))^((?!(台|日|韩|港|深|美)).)*$"}
   - {name: 🇹🇼 臺灣自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(臺|台|TW|(?i)TAIWAN))^((?!(港|日|韩|新|深|美)).)*$"}
   - {name: 🇯🇵 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
   - {name: 🇺🇸 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"}
