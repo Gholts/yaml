@@ -111,6 +111,7 @@ proxy-groups:
   - {name: ⬇️ GameDL, type: select, proxies: [直连, 🚀 默认代理]}
   - {name: 🎯 直连, type: select, proxies: [直连, 🚀 默认代理]}
   - {name: 🈲 自訂廣告, type: select, proxies: [丟棄, 直连, 🚀 默认代理]}
+  - {name: 🅿️ 自訂直連, type: select, proxies: [直连, 丟棄, 🚀 默认代理]}
   - {name: 🐟 漏网之鱼, <<: *pr}
   - {name: 🇭🇰 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
   - {name: 🇸🇬 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新加|SG|(?i)Sing))^((?!(台|日|韩|港|深|美)).)*$"}
@@ -124,6 +125,7 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - RULE-SET,private_domain,直连
+  - RULE-SET,dr-gholts,🅿️ 自訂直連
   - RULE-SET,ad-gholts,🈲 自訂廣告
   - RULE-SET,ad-awavenue,🈲 自訂廣告
   - RULE-SET,apple_domain,🍎 Apple
@@ -166,5 +168,6 @@ rule-providers:
   
   ad-gholts: { <<: *class, url: "https://ghfast.top/https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/ad.list"}
   ad-awavenue: { <<: *yaml, url: "https://ghfast.top/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml"}
-  
+  dr-gholts: { <<: *class, url: "https://ghfast.top/https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/dr.list"}
+
   cn_ip: { <<: *ip, url: "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
