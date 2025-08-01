@@ -1,0 +1,458 @@
+######### 锚点 start #######
+# 策略组相关
+pr:
+  &pr {
+    type: select,
+    proxies:
+      [
+        ssid-默认,
+        ssid-香港,
+        ssid-香港自动选择,
+        ssid-台湾,
+        ssid-台湾自动选择,
+        ssid-日本,
+        ssid-日本自动选择,
+        ssid-新加坡,
+        ssid-新加坡自动选择,
+        ssid-美国,
+        ssid-美国自动选择,
+        ssid-其它地区,
+        ssid-全部节点,
+        ssid-自动选择,
+        直连,
+      ],
+  }
+#这里是订阅更新和延迟测试相关的
+p:
+  &p {
+    type: http,
+    interval: 3600,
+    health-check:
+      {
+        enable: true,
+        url: "https://www.gstatic.com/generate_204",
+        interval: 300,
+      },
+  }
+######### 锚点 end #######
+
+proxy-providers:
+  YZT:
+    !!merge <<: *p
+    url: "abc.com"
+    benchmark-url: https://www.gstatic.com/generate_204
+    interval: 3600
+ipv6: true
+allow-lan: true
+mixed-port: 7890
+external-controller: 127.0.0.1:9090
+profile:
+  store-selected: true
+  store-fake-ip: true
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter:
+    - "*"
+    - +.lan
+    - +.local
+  default-nameserver:
+    - 223.5.5.5
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+proxies:
+  - name: "直连"
+    type: direct
+    udp: true
+  - name: wireguard
+    type: wireguard
+    server: abc.com
+    port: 1234
+    ip: 0.0.0.0
+    private-key: kfc
+    public-key: mcd
+    udp: true
+    dns:
+      - 1.0.0.1
+      - 223.6.6.6
+proxy-groups:
+  - {
+      name: 默认,
+      type: select,
+      proxies:
+        [
+          自动选择,
+          直连,
+          香港,
+          香港自动选择,
+          台湾,
+          台湾自动选择,
+          日本,
+          日本自动选择,
+          新加坡,
+          新加坡自动选择,
+          美国,
+          美国自动选择,
+          其它地区,
+          全部节点,
+        ],
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Proxy.png",
+    }
+  - {
+      name: Home,
+      type: select,
+      proxies: [ssid-Wireguard, 直连, ssid-默认, ssid-自动选择],
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Google_Search.png",
+    }
+  - {
+      name: AI,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AI.png",
+    }
+  - {
+      name: Google,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Google_Search.png",
+    }
+  - {
+      name: Apple,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Apple.png",
+    }
+  - {
+      name: Telegram,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Telegram.png",
+    }
+  - {
+      name: Twitter,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Twitter.png",
+    }
+  - {
+      name: 哔哩哔哩,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/bilibili.png",
+    }
+  - {
+      name: 巴哈姆特,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Bahamut.png",
+    }
+  - {
+      name: YouTube,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/YouTube.png",
+    }
+  - {
+      name: Spotify,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Spotify.png",
+    }
+  - {
+      name: 国内,
+      type: select,
+      proxies:
+        [
+          直连,
+          ssid-默认,
+          ssid-香港,
+          ssid-香港自动选择,
+          ssid-台湾,
+          ssid-台湾自动选择,
+          ssid-日本,
+          ssid-日本自动选择,
+          ssid-新加坡,
+          ssid-新加坡自动选择,
+          ssid-美国,
+          ssid-美国自动选择,
+          ssid-其它地区,
+          ssid-全部节点,
+          ssid-自动选择,
+        ],
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/China_Map.png",
+    }
+  - {
+      name: 其他,
+      !!merge <<: *pr,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Final.png",
+    }
+  #分隔,下面是地区分组
+  - {
+      name: 香港,
+      type: select,
+      include-all: true,
+      filter: "(?i)(?!直连)(港|hk|hongkong|hong kong)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/HK.png",
+    }
+  - {
+      name: 台湾,
+      type: select,
+      include-all: true,
+      filter: "(?i)(?!直连)(台|tw|taiwan)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/TW.png",
+    }
+  - {
+      name: 日本,
+      type: select,
+      include-all: true,
+      filter: "(?i)(?!直连)(日|jp|japan)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/JP.png",
+    }
+  - {
+      name: 美国,
+      type: select,
+      include-all: true,
+      filter: "(?i)(?!直连)(美|us|unitedstates|united states)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/US.png",
+    }
+  - {
+      name: 新加坡,
+      type: select,
+      include-all: true,
+      filter: "(?i)(?!直连)(新|sg|singapore)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SG.png",
+    }
+  - {
+      name: 其它地区,
+      type: select,
+      include-all: true,
+      filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates|直连)).*",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Available.png",
+    }
+  - {
+      name: 自动选择,
+      type: url-test,
+      include-all: true,
+      tolerance: 10,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Auto.png",
+    }
+  - {
+      name: 全部节点,
+      type: select,
+      include-all: true,
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Global.png",
+    }
+  - {
+      name: Wireguard,
+      type: select,
+      include-all: true,
+      filter: "(?i)(?!直连)(wg|wireguard)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Back.png",
+    }
+  - {
+      name: 香港自动选择,
+      type: url-test,
+      include-all: true,
+      filter: "(?i)(?!直连)(港|hk|hongkong|hong kong)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/HK.png",
+    }
+  - {
+      name: 台湾自动选择,
+      type: url-test,
+      include-all: true,
+      filter: "(?i)(?!直连)(台|tw|taiwan)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/TW.png",
+    }
+  - {
+      name: 日本自动选择,
+      type: url-test,
+      include-all: true,
+      filter: "(?i)(?!直连)(日|jp|japan)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/JP.png",
+    }
+  - {
+      name: 美国自动选择,
+      type: url-test,
+      include-all: true,
+      filter: "(?i)(?!直连)(美|us|unitedstates|united states)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/US.png",
+    }
+  - {
+      name: 新加坡自动选择,
+      type: url-test,
+      include-all: true,
+      filter: "(?i)(新|sg|singapore)",
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/SG.png",
+    }
+  #分隔,下面是場景分組
+  - {
+      name: ssid-默认,
+      type: select,
+      proxies: [默认, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 默认, default: 默认 },
+    }
+  - {
+      name: ssid-香港,
+      type: select,
+      proxies: [香港, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 香港, default: 香港 },
+    }
+  - {
+      name: ssid-香港自动选择,
+      type: select,
+      proxies: [香港自动选择, 直连],
+      ssid-policy:
+        { replaceSSID: 直连, cellular: 香港自动选择, default: 香港自动选择 },
+    }
+  - {
+      name: ssid-台湾,
+      type: select,
+      proxies: [台湾, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 台湾, default: 台湾 },
+    }
+  - {
+      name: ssid-台湾自动选择,
+      type: select,
+      proxies: [台湾自动选择, 直连],
+      ssid-policy:
+        { replaceSSID: 直连, cellular: 台湾自动选择, default: 台湾自动选择 },
+    }
+  - {
+      name: ssid-日本,
+      type: select,
+      proxies: [日本, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 日本, default: 日本 },
+    }
+  - {
+      name: ssid-日本自动选择,
+      type: select,
+      proxies: [日本自动选择, 直连],
+      ssid-policy:
+        { replaceSSID: 直连, cellular: 日本自动选择, default: 日本自动选择 },
+    }
+  - {
+      name: ssid-新加坡,
+      type: select,
+      proxies: [新加坡, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 新加坡, default: 新加坡 },
+    }
+  - {
+      name: ssid-新加坡自动选择,
+      type: select,
+      proxies: [新加坡自动选择, 直连],
+      ssid-policy:
+        { replaceSSID: 直连, cellular: 新加坡自动选择, default: 新加坡自动选择 },
+    }
+  - {
+      name: ssid-美国,
+      type: select,
+      proxies: [美国, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 美国, default: 美国 },
+    }
+  - {
+      name: ssid-美国自动选择,
+      type: select,
+      proxies: [美国自动选择, 直连],
+      ssid-policy:
+        { replaceSSID: 直连, cellular: 美国自动选择, default: 美国自动选择 },
+    }
+  - {
+      name: ssid-其它地区,
+      type: select,
+      proxies: [其它地区, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 其它地区, default: 其它地区 },
+    }
+  - {
+      name: ssid-全部节点,
+      type: select,
+      proxies: [全部节点, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 全部节点, default: 全部节点 },
+    }
+  - {
+      name: ssid-自动选择,
+      type: select,
+      proxies: [自动选择, 直连],
+      ssid-policy: { replaceSSID: 直连, cellular: 自动选择, default: 自动选择 },
+    }
+  - {
+      name: ssid-Wireguard,
+      type: select,
+      proxies: [Wireguard, 直连],
+      ssid-policy:
+        { replaceSSID: 直连, cellular: Wireguard, default: Wireguard },
+    }
+rules:
+  - GEOIP,lan,Home,no-resolve
+  - RULE-SET,ai_domain,AI
+  - RULE-SET,github_domain,其他
+  - RULE-SET,twitter_domain,Twitter
+  - RULE-SET,youtube_domain,YouTube
+  - RULE-SET,google_domain,Google
+  - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,bilibili_domain,哔哩哔哩
+  - RULE-SET,bahamut_domain,巴哈姆特
+  - RULE-SET,spotify_domain,Spotify
+  - RULE-SET,pixiv_domain,其他
+  - RULE-SET,geolocation-!cn,其他
+  - RULE-SET,google_ip,Google
+  - RULE-SET,telegram_ip,Telegram
+  - RULE-SET,twitter_ip,Twitter
+  - RULE-SET,cn_domain,国内
+  - RULE-SET,cn_ip,国内
+  - MATCH,其他
+rule-anchor:
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: text }
+  domain:
+    &domain { type: http, interval: 86400, behavior: domain, format: text }
+rule-providers:
+  private:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.list"
+  cn_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
+  github_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list"
+  twitter_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
+  youtube_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list"
+  google_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
+  telegram_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.list"
+  bilibili_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list"
+  bahamut_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.list"
+  spotify_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.list"
+  pixiv_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/pixiv.list"
+  geolocation-!cn:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
+  ai_domain:
+    !!merge <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.list"
+  cn_ip:
+    !!merge <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+  google_ip:
+    !!merge <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+  twitter_ip:
+    !!merge <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+  telegram_ip:
+    !!merge <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list"
+  广告拦截合集-不要设置策略偏好:
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: http://script.hub/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/QuantumultX/filter/filter.list/_end_/filter.list?type=rule-set&target=stash-rule-set&del=true&jqEnabled=true
+mode: rule
