@@ -66,9 +66,9 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
 
-pr: &pr {type: select, proxies: [🚀 默认代理, 🇭🇰 香港自动, 🇸🇬 新加坡自动, 🇹🇼 臺灣自动, 🇯🇵 日本自动, 🇺🇸 美国自动, ♻️ 自动选择, 🌐 全部节点, 直连]}
+pr: &pr {type: select, proxies: [🚀 默认代理, 🇭🇰 香港自动, 🇸🇬 新加坡自动, 🇹🇼 臺灣自动, 🇯🇵 日本自动, 🇺🇸 美国自动, ♻️ 自动选择, 🌐 全部节点, 直连, 丟棄]}
 proxy-groups:
-  - {name: 🚀 默认代理, type: select, proxies: [🇭🇰 香港自动, 🇸🇬 新加坡自动, 🇹🇼 臺灣自动, 🇯🇵 日本自动, 🇺🇸 美国自动, ♻️ 自动选择, 🌐 全部节点, 直连]}
+  - {name: 🚀 默认代理, type: select, proxies: [🇭🇰 香港自动, 🇸🇬 新加坡自动, 🇹🇼 臺灣自动, 🇯🇵 日本自动, 🇺🇸 美国自动, ♻️ 自动选择, 🌐 全部节点, 直连, 丟棄]}
   - {name: 📹 YouTube, <<: *pr}
   - {name: 🎵 Spotify, <<: *pr}
   - {name: 🌸 巴哈姆特, type: select, proxies: [🇹🇼 臺灣自动, 🇭🇰 香港自动, 直连, 🚀 默认代理]}
@@ -79,8 +79,9 @@ proxy-groups:
   - {name: 🕹 Game, type: select, proxies: [🚀 默认代理, 直连]}
   - {name: ⬇️ GameDL, type: select, proxies: [直连, 🚀 默认代理]}
   - {name: 🎯 直连, type: select, proxies: [直连, 🚀 默认代理]}
-  - {name: 🈲 自訂廣告, type: select, proxies: [丟棄, 直连, 🚀 默认代理]}
   - {name: 🅿️ 自訂直連, type: select, proxies: [直连, 丟棄, 🚀 默认代理]}
+  - {name: ✳️ 自訂代理, type: select, proxies: [🚀 默认代理, 直连, 丟棄]}
+  - {name: 🈲 自訂廣告, type: select, proxies: [丟棄, 直连, 🚀 默认代理]}
   - {name: 🐟 漏网之鱼, <<: *pr}
   - {name: 🇭🇰 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
   - {name: 🇸🇬 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新加|SG|(?i)Sing))^((?!(台|日|韩|港|深|美)).)*$"}
@@ -93,6 +94,7 @@ proxy-groups:
 rules:
   - RULE-SET,private_domain,直连
   - RULE-SET,dr-gholts,🅿️ 自訂直連
+  - RULE-SET,px-gholts,✳️ 自訂代理
   - RULE-SET,ad-gholts,🈲 自訂廣告
   - RULE-SET,ad-awavenue,🈲 自訂廣告
   - RULE-SET,apple_domain,🍎 Apple
@@ -132,8 +134,9 @@ rule-providers:
   geolocation-not-cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   
-  ad-gholts: { <<: *class, url: "https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/ad.list"}
   ad-awavenue: { <<: *yaml, url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml"}
+  px-gholts: { <<: *class, url: "https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/px.list"}
+  ad-gholts: { <<: *class, url: "https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/ad.list"}
   dr-gholts: { <<: *class, url: "https://raw.githubusercontent.com/Gholts/yaml/refs/heads/main/rule/dr.list"}
 
   cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
