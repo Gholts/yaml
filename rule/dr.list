@@ -1,8 +1,13 @@
+# ddns
 DOMAIN-SUFFIX,api.ipify.org
 DOMAIN-SUFFIX,ddns.oray.com
 DOMAIN-SUFFIX,ip.3322.net
 DOMAIN-SUFFIX,4.ipw.cn
 DOMAIN-SUFFIX,v4.yinghualuo.cn
+
+# anime1.me
+DOMAIN-SUFFIX,anime1.me
+DOMAIN-SUFFIX,anicdn.com
 
 
 
