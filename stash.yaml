@@ -353,8 +353,3 @@ rule-providers:
   telegram_ip:
     !!merge <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list"
-  广告拦截合集-不要设置策略偏好:
-    behavior: classical
-    format: text
-    interval: 86400
-    url: https://raw.githubusercontent.com/fmz200/wool_scripts/main/QuantumultX/filter/filter.list
