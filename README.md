@@ -32,6 +32,7 @@
 ## 🏆 Acknowledgements
 
 - [Mihomo](https://github.com/MetaCubeX/mihomo/) —— 所有的起點。
+- [Sukkaw](https://github.com/SukkaW/Surge) —— 非常實用的規則。
 - [Kelee](https://t.me/iKeLee) —— 我的配置文件基於 Kelee 的進階配置修改，感謝配置文件的提供和 Loon 插件規則的維護。
 - [Qure](https://github.com/Koolson/Qure) —— 十分好看的資源圖標。
 - [Zashboard](https://github.com/Zephyruso/zashboard) —— 好看好用的面板。
