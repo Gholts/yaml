@@ -191,6 +191,3 @@ rules:
   - RULE-SET,china_ip,Passthru
   - RULE-SET,china_ip_ipv6,Passthru
   - MATCH,Fallback
-
-  - GEOSITE,google,Google
-  - GEOSITE,google-cn,Google
