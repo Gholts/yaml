@@ -80,7 +80,7 @@ proxy-groups:
   - {name: SG urltest, <<: *p, filter: "(?=.*(新|SG|(?i)Sing))^((?!(德|澳|台|日|韩|港|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png"}
   - {name: TW urltest, <<: *p, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(德|澳|港|日|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png"}
   - {name: JP urltest, <<: *p, filter: "(?=.*(日|JP|(?i)Japan))^((?!(德|澳|台|港|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png"}
-  - {name: US urltest, <<: *p, filter: "(?=.*(美|US|(?i)States|America))^((?!(德|澳|台|日|韩|新|深|港)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png"}
+  - {name: US urltest, <<: *p, filter: "(?=.*(美|US|(?i)States|America))^((?!(德|澳|台|日|韩|新|港)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png"}
   
 rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
