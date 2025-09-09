@@ -36,6 +36,7 @@ dns:
   fake-ip-range: 28.0.0.1/8
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
+    - "+.argotunnel.com"
     - "rule-set:private_domain,cn_domain"
     - "+.services.googleapis.cn"
     - "+.xn--ngstr-lra8j.com"
@@ -50,7 +51,7 @@ dns:
 
 proxy-providers:
   SubStore:
-    url: "http://192.168.10.2:3001/gholts0x13top/download/YZT?target=ClashMeta"
+    url: "http://192.168.10.3:3001/subpath/download/YZT?target=ClashMeta"
     type: http
     interval: 86400
     proxy: DIRECT
@@ -142,6 +143,8 @@ rule-providers:
   china_ip_ipv6: { <<: *ip_text, url: "https://ruleset.skk.moe/Clash/ip/china_ip_ipv6.txt"}
 
 rules:
+  - DOMAIN-SUFFIX,argotunnel.com,DIRECT
+
   - RULE-SET,ad-awavenue,REJECT
   - RULE-SET,ad-gholts,REJECT
   - RULE-SET,dr-gholts,Passthru
