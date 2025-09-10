@@ -8,6 +8,7 @@
   <br/><br/>
   <a target="_blank" href="https://github.com/Gholts/yaml"><img src="https://img.shields.io/github/last-commit/Gholts/yaml?logo=github&color=395799&logoColor=fff" alt="Last commit"/></a>
   <a href="https://github.com/Gholts/yaml/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-395799?logo=opensourceinitiative&logoColor=fff" alt="License CC BY-NC-SA 4.0"/></a>
+  <img src="asset/Zashboard.png" alt="zashboard" width="100%"/>
 </p>
 
 * [Getting started](#-getting-started)
