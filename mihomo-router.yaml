@@ -148,7 +148,7 @@ rules:
 
   - GEOSITE,GOOGLE-PLAY@CN,DIRECT
   - DOMAIN-SUFFIX,argotunnel.com,DIRECT
-  - DOMAIN-SUFFIX, steamserver.net, DIRECT
+  - DOMAIN-SUFFIX,steamserver.net,DIRECT
 
   - RULE-SET,gamedl,DIRECT
   - RULE-SET,gamedlcn,DIRECT
