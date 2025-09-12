@@ -51,7 +51,7 @@ dns:
 
 proxy-providers:
   SubStore:
-    url: "http://192.168.10.3:3001/subpath/download/YZT?target=ClashMeta"
+    url: "http://192.168.10.3:3001/subpath/download/collection/ALL?target=ClashMeta"
     type: http
     interval: 86400
     proxy: DIRECT
@@ -80,7 +80,7 @@ proxy-groups:
   - {name: DE urltest, <<: *p, filter: "(?=.*(德|DE|(?i)Germany))^((?!(港|澳|台|日|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png"}
   - {name: SG urltest, <<: *p, filter: "(?=.*(新|SG|(?i)Sing))^((?!(德|澳|台|日|韩|港|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png"}
   - {name: TW urltest, <<: *p, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(德|澳|港|日|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png"}
-  - {name: JP urltest, <<: *p, filter: "(?=.*(日|JP|(?i)Japan))^((?!(德|澳|台|港|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png"}
+  - {name: JP urltest, <<: *p, filter: "(?=.*(日|JP|(?i)Japan))^((?!(德|尼|澳|台|港|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png"}
   - {name: US urltest, <<: *p, filter: "(?=.*(美|US|(?i)States|America))^((?!(德|澳|台|日|韩|新|港)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png"}
   
 rule-anchor:
@@ -109,20 +109,19 @@ rule-providers:
   stream_hk_non_ip: { <<: *class, url: "https://ruleset.skk.moe/Clash/non_ip/stream_hk.txt"}
   stream_tw_non_ip: { <<: *class, url: "https://ruleset.skk.moe/Clash/non_ip/stream_tw.txt"}
 
-  ai-not-cn: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs" }
+  ai-not-cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"}
   telegram_non_ip: { <<: *class, url: "https://ruleset.skk.moe/Clash/non_ip/telegram.txt"}
   telegram_ip: { <<: *class, url: "https://ruleset.skk.moe/Clash/ip/telegram.txt"}
-  instagram: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs" }
-  discord: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/discord.mrs" }
-  line: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs" }
-  whatsapp: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs" }
-  facebook: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs" }
-  messenger: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/messenger.mrs" }
-  twitter: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs" }
-  instagram: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs" }
-  threads: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/threads.mrs" }
-  dcard: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/dcard.mrs" }
-  bahamut: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs" }
+  discord: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/discord.mrs"}
+  line: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"}
+  whatsapp: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs"}
+  facebook: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"}
+  messenger: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/messenger.mrs"}
+  twitter: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"}
+  instagram: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"}
+  threads: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/threads.mrs"}
+  dcard: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/dcard.mrs"}
+  bahamut: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs"}
 
   game: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.list"}
   microsoft_cdn_non_ip: { <<: *class, url: "https://ruleset.skk.moe/Clash/non_ip/microsoft_cdn.txt"}
@@ -142,12 +141,14 @@ rule-providers:
   china_ip_ipv6: { <<: *ip_text, url: "https://ruleset.skk.moe/Clash/ip/china_ip_ipv6.txt"}
 
 rules:
-  - DOMAIN-SUFFIX,argotunnel.com,DIRECT
-
   - RULE-SET,ad-awavenue,REJECT
   - RULE-SET,ad-gholts,REJECT
   - RULE-SET,dr-gholts,Passthru
   - RULE-SET,px-gholts,Default
+
+  - GEOSITE,GOOGLE-PLAY@CN,DIRECT
+  - DOMAIN-SUFFIX,argotunnel.com,DIRECT
+  - DOMAIN-SUFFIX, steamserver.net, DIRECT
 
   - RULE-SET,gamedl,DIRECT
   - RULE-SET,gamedlcn,DIRECT
