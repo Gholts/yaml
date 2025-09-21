@@ -44,6 +44,7 @@ dns:
     - "+.lan"
     - "+.local"
   default-nameserver:
+    - 1.0.0.1
     - 223.5.5.5
   nameserver:
     - https://doh.pub/dns-query
@@ -58,10 +59,10 @@ proxy-providers:
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
-      interval: 300
+      interval: 900
 
 pr: &pr {type: select, proxies: [Default, HK urltest, MO urltest, KR urltest, DE urltest, SG urltest, TW urltest, JP urltest, US urltest, Selector, DIRECT, REJECT]}
-p: &p {type: url-test, include-all: true, tolerance: 20, interval: 300}
+p: &p {type: url-test, include-all: true, tolerance: 20, interval: 1800}
 
 proxy-groups:
   - {name: Default, type: select, proxies: [HK urltest, MO urltest, KR urltest, DE urltest, SG urltest, TW urltest, JP urltest, US urltest, Selector, DIRECT, REJECT], icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cellular.png"}
@@ -127,7 +128,7 @@ rule-providers:
   microsoft_cdn_non_ip: { <<: *class, url: "https://ruleset.skk.moe/Clash/non_ip/microsoft_cdn.txt"}
   microsoft_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
   apple_news: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleNews/AppleNews.list"}
-  apple_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
+  apple_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"}
   google: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   google_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-cn.mrs"}
 
@@ -141,6 +142,10 @@ rule-providers:
   china_ip_ipv6: { <<: *ip_text, url: "https://ruleset.skk.moe/Clash/ip/china_ip_ipv6.txt"}
 
 rules:
+  - DOMAIN,doh.pub,DIRECT
+  - DOMAIN,dns.alidns.com,DIRECT
+  - SRC-IP-CIDR,1.0.0.1/32,DIRECT
+  - SRC-IP-CIDR,223.5.5.5/32,DIRECT
   - RULE-SET,ad-awavenue,REJECT
   - RULE-SET,ad-gholts,REJECT
   - RULE-SET,dr-gholts,Passthru
