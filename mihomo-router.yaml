@@ -121,6 +121,7 @@ rule-providers:
   twitter: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"}
   instagram: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"}
   threads: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/threads.mrs"}
+  reddit: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/reddit.mrs"}
   dcard: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/dcard.mrs"}
   bahamut: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs"}
 
@@ -181,6 +182,7 @@ rules:
   - RULE-SET,twitter,SNS
   - RULE-SET,instagram,SNS
   - RULE-SET,threads,SNS
+  - RULE-SET,reddit,SNS
   - RULE-SET,dcard,TW urltest
   - RULE-SET,bahamut,TW urltest
 
