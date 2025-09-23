@@ -151,9 +151,11 @@ rules:
   - RULE-SET,dr-gholts,Passthru
   - RULE-SET,px-gholts,Default
 
-  - GEOSITE,GOOGLE-PLAY@CN,DIRECT
+  - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AI
+  - DOMAIN-SUFFIX,apple-relay.apple.com,AI
   - DOMAIN-SUFFIX,argotunnel.com,DIRECT
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
+  - GEOSITE,GOOGLE-PLAY@CN,DIRECT
 
   - RULE-SET,gamedl,DIRECT
   - RULE-SET,gamedlcn,DIRECT
