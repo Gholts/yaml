@@ -1,6 +1,6 @@
 external-controller: 0.0.0.0:9090
 secret: ""
-external-ui: "/etc/nikki/run/ui" # 對於 Nikki
+external-ui: "/etc/nikki/run/ui" # Nikki
 external-ui-name: Zashboard
 external-ui-url: "https://github.com/Zephyruso/zashboard/archive/gh-pages.zip"
 
@@ -52,7 +52,7 @@ dns:
 
 proxy-providers:
   SubStore:
-    url: "http://192.168.10.3:3001/subpath/download/collection/ALL?target=ClashMeta"
+    url: 
     type: http
     interval: 86400
     proxy: DIRECT
@@ -143,26 +143,19 @@ rule-providers:
   china_ip_ipv6: { <<: *ip_text, url: "https://ruleset.skk.moe/Clash/ip/china_ip_ipv6.txt"}
 
 rules:
-  - DOMAIN,doh.pub,DIRECT
-  - DOMAIN,dns.alidns.com,DIRECT
-  - IP-CIDR,1.0.0.1/32,DIRECT
-  - IP-CIDR,223.5.5.5/32,DIRECT
+  # Custom Rules
   - RULE-SET,ad-awavenue,REJECT
   - RULE-SET,ad-gholts,REJECT
   - RULE-SET,dr-gholts,Passthru
   - RULE-SET,px-gholts,Default
 
-  - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AI
-  - DOMAIN-SUFFIX,apple-relay.apple.com,AI
-  - DOMAIN-SUFFIX,argotunnel.com,DIRECT
-  - DOMAIN-SUFFIX,steamserver.net,DIRECT
-  - GEOSITE,GOOGLE-PLAY@CN,DIRECT
-
+  # Directed Misc
   - RULE-SET,gamedl,DIRECT
   - RULE-SET,gamedlcn,DIRECT
   - RULE-SET,speedtest,DIRECT
   - RULE-SET,wechat,DIRECT
 
+  # Streaming
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,stream_us_non_ip,US urltest
   - RULE-SET,stream_eu_non_ip,DE urltest
@@ -171,6 +164,9 @@ rules:
   - RULE-SET,stream_hk_non_ip,HK urltest
   - RULE-SET,stream_tw_non_ip,TW urltest
 
+  # Services
+  - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AI
+  - DOMAIN-SUFFIX,apple-relay.apple.com,AI
   - RULE-SET,ai-not-cn,AI
   - RULE-SET,telegram_non_ip,SNS
   - RULE-SET,telegram_ip,SNS
@@ -194,8 +190,8 @@ rules:
   - RULE-SET,google,Google
   - RULE-SET,google_cn,Google
 
+  # Networking
   - RULE-SET,private_domain,DIRECT
-
   - RULE-SET,global_non_ip,Fallback
   - RULE-SET,gfw_domain,Fallback
   - RULE-SET,geolocation-not-cn,Fallback
@@ -203,3 +199,4 @@ rules:
   - RULE-SET,china_ip,Passthru
   - RULE-SET,china_ip_ipv6,Passthru
   - MATCH,Fallback
+

@@ -1,3 +1,14 @@
+# DNS
+IP-CIDR,1.0.0.1/32
+IP-CIDR,223.5.5.5/32
+DOMAIN-SUFFIX,doh.pub
+DOMAIN-SUFFIX,dns.alidns.com
+
+# Misc
+DOMAIN-SUFFIX,argotunnel.com
+DOMAIN-SUFFIX,steamserver.net
+GEOSITE,GOOGLE-PLAY@CN
+
 # ddns
 DOMAIN-SUFFIX,api.ipify.org
 DOMAIN-SUFFIX,ddns.oray.com
@@ -14,4 +25,3 @@ DOMAIN-SUFFIX,d1zquzjgwo9yb.cloudfront.net
 DOMAIN-SUFFIX,mangacopy.com
 DOMAIN-SUFFIX,2025copy.com
 
-DOMAIN-SUFFIX,astro.build
