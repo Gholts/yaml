@@ -167,6 +167,7 @@ rules:
   # Services
   - DOMAIN-SUFFIX,apple-relay.cloudflare.com,AI
   - DOMAIN-SUFFIX,apple-relay.apple.com,AI
+  - DOMAIN-SUFFIX,webresultproxy.diabrowser.engineering,AI
   - RULE-SET,ai-not-cn,AI
   - RULE-SET,telegram_non_ip,SNS
   - RULE-SET,telegram_ip,SNS
