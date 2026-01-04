@@ -21,7 +21,7 @@
     - mihomo
         - `mihomo-router.yaml`
     - loon
-        - 進階 - `loon.conf` (適合有軟路由的場景。替換 `loon.conf` 檔案內的所有 `replaceSSID` 為你的 ssid。替換 `replacerouterip` 為你的路由器後臺地址，如果為旁路由結構，填寫設備實際局域網 DNS 地址。同時還預留了 WireGuard 節點位置，如需替換為自己的地址即可，語法參考[官方文檔](https://nsloon.app/LoonManual/#/cn/node?id=%e8%8a%82%e7%82%b9%e6%a0%bc%e5%bc%8f)。 連線到你指定的 SSID 後，所有流量皆直連，由軟路由路由管理。)
+        - 進階 - `loon.conf` (適合有軟路由的場景。替換 `loon.conf` 檔案內的所有 `SSID` 為你的 ssid。替換 `RouterIP` 為你的路由器後臺地址，如果為旁路由結構，填寫設備實際局域網關地址。
     - stash (自 2025-Sep-2 不再維護)
         - 進階 - `ssid-stash`（適合有軟路由的場景。替換 `ssid-stash.yaml` 檔案內的所有 `replaceSSID` 為你的 SSID。連線到你指定的 SSID 後，所有流量皆直連，由軟路由路由管理。）
         - 普通 - `stash`（適合沒有軟路由，終端代理的場景。）
@@ -32,13 +32,12 @@
 
 ## 🏆 Acknowledgements
 
-- [Mihomo](https://github.com/MetaCubeX/mihomo/) —— 所有的起點。
-- [Sukkaw](https://github.com/SukkaW/Surge) —— 非常實用的規則。
-- [Kelee](https://t.me/iKeLee) —— 我的配置文件基於 Kelee 的進階配置修改，感謝配置文件的提供和 Loon 插件規則的維護。
-- [Qure](https://github.com/Koolson/Qure) —— 十分好看的資源圖標。
-- [Zashboard](https://github.com/Zephyruso/zashboard) —— 好看好用的面板。
-- [ChatGPT](https://chatgpt.com) —— 十分好的圖片生成。
-- [七尺宇的 YAML 檔案梳理](https://youtu.be/watch?v=eUqf3lOhFSw) —— 我是從這裡開始的。
+- [Mihomo](https://github.com/MetaCubeX/mihomo/) —— 起點。
+- [Sukkaw](https://github.com/SukkaW/Surge) —— 實用的規則。
+- [Kelee](https://t.me/iKeLee) —— 基於 Kelee 的進階配置修改，感謝配置文件的提供和 Loon 插件規則的維護。
+- [Qure](https://github.com/Koolson/Qure) —— 資源圖標。
+- [Zashboard](https://github.com/Zephyruso/zashboard) —— 面板。
+- [七尺宇的 YAML 檔案梳理](https://youtu.be/watch?v=eUqf3lOhFSw) —— 從這裡開始。
 
 以上致謝不分先後。
 
