@@ -125,10 +125,6 @@ rule-providers:
   reject_domainset: { type: http, interval: 43200, behavior: domain, format: text, url: https://ruleset.skk.moe/Clash/domainset/reject.txt }
   #------------------------------------------------------------stream
   youtube_domain: { type: http, interval: 43200, behavior: domain, format: mrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs' }
-  stream_us_non_ip: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://ruleset.skk.moe/Clash/non_ip/stream_us.txt' }
-  stream_eu_non_ip: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://ruleset.skk.moe/Clash/non_ip/stream_eu.txt' }
-  stream_jp_non_ip: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://ruleset.skk.moe/Clash/non_ip/stream_jp.txt' }
-  stream_kr_non_ip: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://ruleset.skk.moe/Clash/non_ip/stream_kr.txt' }
   stream_hk_non_ip: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://ruleset.skk.moe/Clash/non_ip/stream_hk.txt' }
   stream_tw_non_ip: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://ruleset.skk.moe/Clash/non_ip/stream_tw.txt' }
   #--------------------------------------------------------bulk/burst
@@ -168,6 +164,8 @@ rule-providers:
   #------------------------------------------------------------google
   google: { type: http, interval: 43200, behavior: domain, format: mrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs' }
   google_cn: { type: http, interval: 43200, behavior: domain, format: mrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-cn.mrs' }
+  #-----------------------------------------------------------alibaba
+  alibaba_domain: { type: http, interval: 43200, behavior: domain, format: mrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/alibaba.mrs' }
   #--------------------------------------------------------------misc
   dr-gholts: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://raw.githubusercontent.com/Gholts/yaml/main/rule/dr.list' }
   px-gholts: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://raw.githubusercontent.com/Gholts/yaml/main/rule/px.list' }
@@ -196,10 +194,6 @@ rules:
   - RULE-SET,reject_non_ip_no_drop,REJECT
   #------------------------------------------------------------stream
   - RULE-SET,youtube_domain,YouTube
-  - RULE-SET,stream_us_non_ip,US urltest
-  - RULE-SET,stream_eu_non_ip,DE urltest
-  - RULE-SET,stream_jp_non_ip,JP urltest
-  - RULE-SET,stream_kr_non_ip,KR urltest
   - RULE-SET,stream_hk_non_ip,HK urltest
   - RULE-SET,stream_tw_non_ip,TW urltest
   #--------------------------------------------------------bulk/burst
@@ -240,6 +234,8 @@ rules:
   #------------------------------------------------------------google
   - RULE-SET,google,Google
   - RULE-SET,google_cn,Google
+  #-----------------------------------------------------------alibaba
+  - RULE-SET,alibaba_domain,DIRECT
   #----------------------------------------------------------fallback
   - RULE-SET,private_domain,DIRECT
   - RULE-SET,lan_non_ip,DIRECT
