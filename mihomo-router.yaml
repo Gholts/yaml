@@ -167,6 +167,7 @@ rule-providers:
   #-----------------------------------------------------------alibaba
   alibaba_domain: { type: http, interval: 43200, behavior: domain, format: mrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/alibaba.mrs' }
   #--------------------------------------------------------------misc
+  imgur_bypass: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/imgur.mrs' }
   dr-gholts: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://raw.githubusercontent.com/Gholts/yaml/main/rule/dr.list' }
   px-gholts: { type: http, interval: 43200, behavior: classical, format: text, url: 'https://raw.githubusercontent.com/Gholts/yaml/main/rule/px.list' }
   gfw_domain: { type: http, interval: 43200, behavior: domain, format: mrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs' }
@@ -217,6 +218,8 @@ rules:
   - RULE-SET,facebook,SNS
   - RULE-SET,dcard,TW urltest
   - RULE-SET,bahamut,TW urltest
+  #------------------------------------------------bypass_restriction
+  - RULE-SET,imgur_bypass,SG urltest
   #-------------------------------------------artificial_intelligence
   - RULE-SET,ai-not-cn,AI
   - RULE-SET,ai_non_ip,AI
