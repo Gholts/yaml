@@ -1,5 +1,8 @@
 # ios-DailyVal
-
 DOMAIN-SUFFIX,applvn.com
 DOMAIN-SUFFIX,applovin.com
 DOMAIN-SUFFIX,mintegral.com
+
+# wechat dns
+DOMAIN-SUFFIX,dns.weixin.qq.com
+DOMAIN-SUFFIX,dns.weixin.qq.com.cn
