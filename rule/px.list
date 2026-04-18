@@ -1,7 +1,8 @@
-# apple music/podcast
-DOMAIN-SUFFIX,podcasts.apple.com
-DOMAIN-SUFFIX,music.apple.com
+# apple
+DOMAIN-SUFFIX,apps.apple.com
 DOMAIN-SUFFIX,lookup-api.apple.com
+DOMAIN-SUFFIX,music.apple.com
+DOMAIN-SUFFIX,podcasts.apple.com
 
 # copymanga
 DOMAIN-SUFFIX,mangafuna.xyz
